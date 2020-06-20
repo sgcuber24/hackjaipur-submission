@@ -10,6 +10,20 @@ import {
   FeatureGroup,
 } from 'react-leaflet';
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
+
+function getColor(peopleCount) {
+  if (peopleCount < 30) {
+    return 'blue';
+  }
+  if (peopleCount < 50 && peopleCount > 30) {
+    return 'yellow';
+  }
+  if (peopleCount < 100 && peopleCount > 50) {
+    return 'orange';
+  }
+  return 'red';
+}
+
 class MapView extends React.Component {
   constructor(props) {
     super(props);
@@ -20,6 +34,7 @@ class MapView extends React.Component {
       isLoaded: false,
     };
   }
+  
   render() {
     console.log(this.state.data);
     return (
@@ -28,19 +43,19 @@ class MapView extends React.Component {
           <LayersControl.BaseLayer name="Stadia (Compact)" checked>
             <TileLayer
               url='https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
-              attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+              attribution='&copy; CrowdDistance, <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
             />
           </LayersControl.BaseLayer>
           <LayersControl.BaseLayer name="Mapnik (Light)">
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              attribution='&copy; CrowdDistance, <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
           </LayersControl.BaseLayer>
           <LayersControl.BaseLayer name="Carto (Dark)">
             <TileLayer
               url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              attribution='&copy; CrowdDistance, <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
             />
           </LayersControl.BaseLayer>
           <LayersControl.Overlay name="Heatmap" checked>
@@ -59,8 +74,12 @@ class MapView extends React.Component {
                 <Circle
                   center={[12.9721, 77.5933]}
                   radius={15}
-                  color={'red'}
-                />
+                  color={getColor(12)}
+                >
+                    <Popup>
+                        <span>Crowd: {null}</span>
+                    </Popup>
+                </Circle>
             </FeatureGroup>
           </LayersControl.Overlay>            
         </LayersControl>
