@@ -43,7 +43,7 @@ class MapView extends React.Component {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
             />
           </LayersControl.BaseLayer>
-          <LayersControl.Overlay name="Heatmap">
+          <LayersControl.Overlay name="Heatmap" checked>
             <HeatmapLayer
               points={null}
               maxZoom={20}
@@ -53,6 +53,15 @@ class MapView extends React.Component {
               gradient={{ 0.4: 'blue', 0.8: 'orange', 1.0: 'red' }}
               max={8.0}
             />
+          </LayersControl.Overlay>
+          <LayersControl.Overlay name="Circle">
+            <FeatureGroup>
+                <Circle
+                  center={[12.9721, 77.5933]}
+                  radius={15}
+                  color={'red'}
+                />
+            </FeatureGroup>
           </LayersControl.Overlay>            
         </LayersControl>
       </Map>
