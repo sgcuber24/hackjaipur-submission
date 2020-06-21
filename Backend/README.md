@@ -15,6 +15,10 @@ This serves the production build of the frontend and the REST APIs required to r
 
 ## Available end-points
 
+### GET /
+
+Serves the frontend.
+
 ### GET /api/v1/count
 
 Gets crowd count in all areas.
