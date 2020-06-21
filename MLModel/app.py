@@ -5,6 +5,10 @@ import argparse
 import cv2
 import numpy as np
 
+from utils import visualize
+from utils import get_params
+from utils import projection
+from utils import violation_check
 from mmdet.apis import inference_detector, init_detector, show_result_pyplot
 
 
@@ -44,7 +48,6 @@ def main():
         video_capture.get(cv2.CAP_PROP_FPS),
         (1500, 1080))
 
-
     while True:
 
         ret, frame = video_capture.read()
@@ -58,6 +61,24 @@ def main():
         for box in result:
             if box[4] >= FLAGS.score_thresh:
                 detections.append(box[:4].astype(np.int16))
+
+        # Perform social distancing
+        person_data = prepare_person_data(detections, homography)
+        person_status, person_connections = violation_check.social_distance_check(person_data)
+
+        # Create all visualizations
+        bird_view_image = np.zeros(shape=(850, 450, 3))
+        frame, bird_view_image = visualize.show_violations(
+            frame,
+            bird_view_image,
+            person_data,
+            person_status,
+            person_connections)
+
+        output_frame = np.concatenate((top_frame, bottom_frame), axis=0)
+        output_frame = np.uint8(output_frame)
+        cv2.line(output_frame, (540, 0), (540, 1080), (184, 55, 55), thickness=8)
+        cv2.line(output_frame, (0, 540), (1500, 540), (184, 55, 55), thickness=8)
 
         video_writer.write(output_frame)
 
