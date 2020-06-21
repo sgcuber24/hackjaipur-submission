@@ -1,4 +1,4 @@
-# Crowd Distance
+# CrowdDistance Frontend
 
 This project shows a map as a frontend to mark crowd densities.
 
