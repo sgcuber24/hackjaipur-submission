@@ -1,0 +1,29 @@
+/* Style the video: 100% width and height to cover the entire window */
+#VideoStream {
+    position: fixed;
+    bottom: 0%;
+    right: 0%;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#logo{
+    display: block;
+    width: 120px;
+    height: auto;
+    margin-left: 90px;
+}
+    
+/* Add some content at the bottom of the video/page */
+.content {
+    position: absolute;
+    font-family: "Open Sans";
+    left: 38%;
+    bottom: 20%;
+    border-radius: 25px;
+    background: rgba(7, 37, 168, 0.85);
+    color: #ffffff;
+    width: 300px;
+    height: 310px;
+    padding: 20px;
+}
