@@ -74,7 +74,7 @@ class MapView extends React.Component {
 							attribution='&copy; CrowdDistance, <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
 						/>
 					</LayersControl.BaseLayer>
-					<LayersControl.Overlay name="Heatmap" checked>
+					<LayersControl.Overlay name="Heatmap">
 						<HeatmapLayer
 							points={this.state.data}
 							maxZoom={20}
@@ -85,7 +85,7 @@ class MapView extends React.Component {
 							max={8.0}
 						/>
 					</LayersControl.Overlay>
-					<LayersControl.Overlay name="Circle">
+					<LayersControl.Overlay name="Circle" checked>
 						<FeatureGroup>
 							{this.state.data.map((cctv) => (
 								<Circle
