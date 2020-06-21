@@ -3,6 +3,7 @@ import React from 'react';
 import './map.css';
 import { Map, Circle, Popup, TileLayer, LayersControl, FeatureGroup } from 'react-leaflet';
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
+import LoadingScreen from './loadingScreen';
 
 function getColor(peopleCount) {
 	if (peopleCount < 30) {
@@ -56,7 +57,9 @@ class MapView extends React.Component {
 	}
 	render() {
 		console.log(this.state.data);
-		return (
+		return !this.state.isLoaded ? (
+      <LoadingScreen className="loading" />
+    ) : (
 			<Map center={[12.9721, 77.5933]} zoom={17} maxZoom={19}>
 				<LayersControl>
 					<LayersControl.BaseLayer name="Mapnik (Light)">
