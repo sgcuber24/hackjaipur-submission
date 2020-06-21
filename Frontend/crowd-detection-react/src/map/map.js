@@ -59,19 +59,13 @@ class MapView extends React.Component {
 		return (
 			<Map center={[12.9721, 77.5933]} zoom={17} maxZoom={19}>
 				<LayersControl>
-					<LayersControl.BaseLayer name="Stadia (Compact)" checked>
-						<TileLayer
-							url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-							attribution='&copy; CrowdDistance, <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-						/>
-					</LayersControl.BaseLayer>
 					<LayersControl.BaseLayer name="Mapnik (Light)">
 						<TileLayer
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 							attribution='&copy; CrowdDistance, <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 						/>
 					</LayersControl.BaseLayer>
-					<LayersControl.BaseLayer name="Carto (Dark)">
+					<LayersControl.BaseLayer name="Carto (Dark)" checked>
 						<TileLayer
 							url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
 							attribution='&copy; CrowdDistance, <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
